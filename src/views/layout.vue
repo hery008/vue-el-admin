@@ -24,7 +24,7 @@
             <el-container>
                 <!-- 侧边栏 -->
                 <el-aside width="200px" style="height:100%;">
-                     <el-menu default-active="0" @select="slideSelect" style="height:100%;">
+                     <el-menu :default-active="slideMeauActive" @select="slideSelect" style="height:100%;">
                         <el-menu-item :index="index | numToString" v-for="(item,index) in slideMeaus" :key="index">
                             <i :class="item.icon"></i>
                             <span slot="title">{{item.name}}</span>
@@ -32,8 +32,8 @@
                     </el-menu>
                 </el-aside>
                 <!-- 主布局 -->
-                <el-main>
-                    <div class="border-bottom mb-3" style="margin:-20px;padding:20px;" v-if="bran.length>0">
+                <el-main class="bg-light">
+                    <div class="border-bottom mb-3 bg-white" style="margin:-20px;padding:20px;" v-if="bran.length>0">
                         <!-- 面包屑 -->
                         <el-breadcrumb separator="/">
                             <el-breadcrumb-item v-for="(item,index) in bran" :key="index" :to="{ path: item.path }">
@@ -43,6 +43,8 @@
                     </div>
                     <!-- 主内容 -->
                     <router-view></router-view>
+                    <!-- 回到顶部 -->
+                    <el-backtop target=".el-main" :bottom="100"></el-backtop>
                 </el-main>
             </el-container>
         </el-container>
@@ -61,7 +63,7 @@
             }
         },
         created(){
-            //初始化菜单
+            //初始化菜单 
             this.navBar = this.$conf.navBar
             //获取面包屑
             this.getRouterBran();

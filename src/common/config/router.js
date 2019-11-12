@@ -55,7 +55,7 @@ function createRoute (arr) {
         let componentFunc = import(`../../views/${arr[i].component}.vue`)
         arr[i].component = () => componentFunc
         if (arr[i].children && arr[i].children.length > 0) { 
-            createRoute (arr[i].children)
+            createRoute(arr[i].children)
         }
     }
 }
